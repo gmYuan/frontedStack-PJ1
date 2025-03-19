@@ -1,47 +1,29 @@
 #!/usr/bin/env node
 
-const lib = require("gmb-base-cli-lib");
-const argv = process.argv;
+const commander = require('commander')
+const pkg = require('../package.json')
 
-console.log("argv是", argv);
+// 使用方法1：内置的单例对象 使用
+// const { program } = commander
 
-const subCommand = argv[2];
-const restArgs = argv.slice(3);
+// program
+//   .version(pkg.version)
+//   .parse(process.argv)
 
-// v1.1 支持识别子命令 + 选项
-// 这里只是最简单的情况，忽略了可能还有 子命令 + 参数/ 多选项 的情况
-// let [option, flag] = restArgs
-// option = option.replace(/--/, '')
+// 使用方法2：新建一个 program对象
+const program = new commander.Command()
 
-// if (subCommand) {
-//   if (lib[subCommand]) {
-//     lib[subCommand]({option, flag})
-//   } else {
-//     console.log('无效的子命令')
-//   }
-// } else {
-//   console.log('请输入子命令')
-// }
+program
+  .name(Object.keys(pkg.bin)[0])
+  .usage('<command> [options]')
+  .version(pkg.version)
+  .option('-d, --debug', '是否开启调试模式', false)
+  .option('-e, --env <envName>', '获取环境变量名称')
+  .parse(process.argv)
 
-// v1.2 支持识别 无子命令的情况
-if (restArgs.length >= 1) {
-  let [option, flag] = restArgs;
-  option = option.replace(/--/, "");
-  if (subCommand) {
-    if (lib[subCommand]) {
-      lib[subCommand]({ option, flag });
-    } else {
-      console.log("无效的子命令");
-    }
-  } else {
-    console.log("请输入子命令");
-  }
-}
+// 获取解析后的选项值
+const options = program.opts(); 
+console.log(options.debug)
+console.log(options.env)
 
-if (subCommand.startsWith('-') || subCommand.startsWith('--')) {
-  const globalOption = subCommand.replace(/--|-/g, '')
-  console.log('globalOption是', globalOption)
-  if (globalOption === 'version' || globalOption === 'V') {
-    console.log('当前版本是 1.0.0')
-  }
-}
+program.outputHelp()
