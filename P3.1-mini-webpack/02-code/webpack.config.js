@@ -1,8 +1,8 @@
 const path  = require('path');
 module.exports = {
-    context: path.resolve(__dirname, 'src'),//当前的工作目录
+    context: path.resolve(__dirname),//当前的工作目录
     mode:'development',
-    entry:'./index.js',
+    entry:'./src/index.js',
     output:{
         path:path.resolve(__dirname,'dist'),
         filename:'[name].js',

@@ -12,6 +12,7 @@
   "devDependencies": {
     "html-webpack-plugin": "^4.4.1",
     "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "babylon": "^6.18.0"
   }
 }

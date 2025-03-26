@@ -1,11 +1,11 @@
-const webpack = require("webpack");
+const webpack = require("./webpack");
 const webpackOptions = require("./webpack.config.js");
 
 // debugger;
 
 const compiler = webpack(webpackOptions);
 
-compiler.run((err, stats) => {
+compiler.run((err = null, stats) => {
   console.log(err);
   console.log(stats.toJson({
     entries: true,
