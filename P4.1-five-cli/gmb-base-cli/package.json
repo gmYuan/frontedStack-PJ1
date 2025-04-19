@@ -4,15 +4,17 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "gmb": "bin/index.js"
+    "gmb": "bin/chalk-ex1.mjs"
   },
   "scripts": {
+    "relink": "npm unlink && npm link",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^5.4.1",
     "commander": "^13.1.0",
     "yargs": "^17.7.2"
   }
